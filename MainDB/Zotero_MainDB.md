@@ -129,7 +129,7 @@ The following query returns a list of item types and associated permissible crea
 SELECT
     itemTypes.typeName,
     json_group_array(creatorType
-        ORDER BY primaryField DESC,itemTypeCreatorTypes.creatorTypeID
+        ORDER BY primaryField DESC, itemTypeCreatorTypes.creatorTypeID
     ) AS creatorTypeNames
 FROM itemTypes, creatorTypes, itemTypeCreatorTypes
 WHERE itemTypeCreatorTypes.creatorTypeID = creatorTypes.creatorTypeID
@@ -157,7 +157,7 @@ WITH
         SELECT
             itemTypes.typeName,
             json_group_array(creatorType
-                ORDER BY primaryField DESC,itemTypeCreatorTypes.creatorTypeID
+                ORDER BY primaryField DESC, itemTypeCreatorTypes.creatorTypeID
             ) AS creatorTypeNamesJSON
         FROM itemTypes, creatorTypes, itemTypeCreatorTypes
         WHERE itemTypeCreatorTypes.creatorTypeID = creatorTypes.creatorTypeID
