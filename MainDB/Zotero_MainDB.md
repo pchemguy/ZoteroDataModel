@@ -74,7 +74,7 @@ The [ERD diagram][] below shows the "core" tables of the bibliographic Zotero da
 ---
 <a id="ERD_Diagram"></a>
 **ERD diagram showing "core" Zotero tables**
-![][Zotero_MainDB%20-%20ERD%20Concepts%208.svg]
+![][Zotero_MainDB-ERD_Concepts_8.svg]
 
 N.B. This diagram was produced  by reverse engineering a Zotero database using [ERD Concepts][], removing less relevant tables, and manually rearranging the remaining tables for best fit.
 
@@ -953,4 +953,4 @@ SELECT tbl_name, code FROM queries;
 [Data Modeling]: https://en.wikipedia.org/wiki/Data_modeling
 [CTE]: https://sqlite.org/lang_with.html
 [DB]: https://en.wikipedia.org/wiki/Database
-[Zotero_MainDB%20-%20ERD%20Concepts%208.svg]: https://gist.githubusercontent.com/pchemguy/19fa69fb4e74ef0cca0026aa0dbf5f42/raw/e82b2367256246c5ae2db07bdc2cb595bd2e75e5/Zotero_MainDB_ERD.svg
+[Zotero_MainDB-ERD_Concepts_8.svg]: https://raw.githubusercontent.com/pchemguy/ZoteroDataModel/refs/heads/main/MainDB/Zotero_MainDB-ERD_Concepts_8.svg
