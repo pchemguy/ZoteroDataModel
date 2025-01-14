@@ -559,13 +559,6 @@ GROUP BY pathName
 HAVING count(*) > 1;
 ```
 
-#### Retrieve Missing  Collections - Query
-
-Assuming a newer version of the main Zotero database is attached as "main", and a previous version is attached as "prev", obtain the list of collections present only in the older database (match collection keys).
-
-```sql
-```
-
 ### Tags
 
 Tags help organize items. Zotero implements a standard tag model (any regular item may be assigned any tags). Hence, the ***tags*** and many-to-many ***itemTags*** tables (shown to the right from the ***items*** table in the [ERD diagram][]) store the tags and assignment information, respectively. 
