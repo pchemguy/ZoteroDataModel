@@ -595,9 +595,9 @@ If Better BibTex for Zotero is installed, the following query attempts to attach
 DETACH better_bibtex;
 
 ATTACH (
-	SELECT substr(file, 1, length(file) - 13) || 'better-bibtex.sqlite' AS prefix
-	FROM pragma_database_list()
-	WHERE name = 'main'
+    SELECT substr(file, 1, length(file) - 13) || 'better-bibtex.sqlite' AS prefix
+    FROM pragma_database_list()
+    WHERE name = 'main'
 ) AS better_bibtex;
 
 SELECT itemID, itemKey, citationKey, pinned
@@ -635,8 +635,8 @@ WITH
         ('itemTypes'), ('items'), ('creatorTypes'), ('creators'), ('itemCreators'),
         ('fields'), ('fieldsCombined'), ('baseFieldMappings'), ('itemDataValues'),
         ('itemData'), ('charsets'), ('itemAttachments'), ('itemNotes'),
-		('itemRelations'), ('tags'), ('itemTags'), ('itemTypeFields'),
-		('itemTypeCreatorTypes'), ('collections'), ('collectionItems')
+        ('itemRelations'), ('tags'), ('itemTags'), ('itemTypeFields'),
+        ('itemTypeCreatorTypes'), ('collections'), ('collectionItems')
     ),
     schema AS (
         SELECT sql || ';' AS sql
@@ -692,11 +692,11 @@ WITH
         '    writefile(''{@output}'',',
         '        ''INSERT OR IGNORE INTO "{@tbl}"({@cols}) VALUES'' || x''0A'' ||',
         '        group_concat(',
-		'            ''    ('' || concat_ws('', '',',
+        '            ''    ('' || concat_ws('', '',',
         '                {@vals}',
         '            ) || '')'',',
-		'            '','' || x''0A'' ORDER BY ROWID',
-		'        ) || '';'' || x''0A''',
+        '            '','' || x''0A'' ORDER BY ROWID',
+        '        ) || '';'' || x''0A''',
         '    ) AS code',
         'FROM "{@tbl}";'
     ))),
