@@ -43,4 +43,6 @@ Datasets, such as bibliographic information libraries, present challenges to man
     - Higher complexity when handling JSON fields programmatically.
     - Challenges with ensuring data integrity and efficient access at the database level.
 
+Modern bibliographic managers often use hybrid models. For example, [Zotero][Zotero Data Model] fields common to most references may be stored in dedicated models or tables, making it possible to take advantage of the relational model.
 
+[Zotero Data Model]
