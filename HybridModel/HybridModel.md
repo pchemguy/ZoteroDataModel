@@ -50,7 +50,7 @@ Modern bibliographic managers often use hybrid models. For example, [Zotero][Zot
 # Combining JSON, Virtual Generated Columns, and Partial Indexes
 
 A potentially interesting hybrid approach incorporates several features:
-- Core fields common to most references are stored in dedicated columns or tables (reference type, title, authors, date, **==WHAT ELSE?==**).
+- Core fields common to most references are stored in dedicated columns or tables (*reference type*, *title*, *authors*, *date*, *item id type*, *item id*, **==WHAT ELSE?==**).
 - Other fields are stored in a `TEXT` column as JSON documents.
 - Virtual generated columns are added as necessary for each commonly accessed field and contain values extracted from the JSON column (it is possible to add such columns for all fields).
 - Partial indexes are created on each generated column, where the column value is not `NULL`.
