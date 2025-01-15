@@ -1,6 +1,6 @@
-# Zotero Data Model
+# Modeling Bibliographic Information in RDBMS
 
-This project is focused on the [Zotero][] data model. [Some material][ZoteroDataModel] was previously published as a [gist][ZoteroDataModelGist].
+This project focuses on modeling bibliographic information in relational databases. The first part gives a brief overview of common basic approaches used for this purpose. on the [Zotero][] data model. [Some material][ZoteroDataModel] was previously published as a [gist][ZoteroDataModelGist].
 
 
 <!-- References -->
