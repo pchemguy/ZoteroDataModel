@@ -1,4 +1,4 @@
-# Hybrid Pseudo-Relational Extensible Model for Semi-structured Data in SQLite
+# Hybrid Extensible Model for Semi-structured Data in SQLite
 
 Datasets, such as bibliographic information libraries, present challenges to managing the data effectively in relational databases, because different reference types, such as *book* or *journal article*, have different sets of fields. Further, to cover a broad spectrum of use cases, a sufficiently large set of reference types needs to be used. Further yet, it is desirable to have the ability to define new types dynamically making it possible to tailor the data model to unusual scenarios. There are several approaches used to store such data in RDBMSs:
 1. Flat Table Model
@@ -11,17 +11,7 @@ Datasets, such as bibliographic information libraries, present challenges to man
     Disadvantages:
     - Inefficient for highly diverse or large datasets due to sparse or unused columns.
     - Difficult to enforce data integrity for specific document types.
-2. Entity-Attribute-Value (EAV) or Vertical Model
-    Description:
-    - A flexible design where references and their attributes are stored separately.
-    - Supports dynamic schema evolution without requiring database structure changes.
-    Advantages:
-    - Flexible and extensible, accommodating arbitrary attributes.
-    - Ideal for datasets with highly variable or unpredictable metadata.
-    Disadvantages:
-    - Querying and reporting are more complex.
-    - Harder to enforce constraints on attribute values.
-3. Normalized Relational Model
+2. Normalized Relational Model
     Description:
     - Relational tables separate bibliographic information into core entities (e.g., authors, journals, publishers).
     - Individual reference types are stored in dedicated tables (e.g., books, patents, standards).
@@ -32,6 +22,16 @@ Datasets, such as bibliographic information libraries, present challenges to man
     - Requires a more complex schema.
     - Joins are necessary for queries, which may impact performance for large datasets.
     - Ill-suited for common queries involving arbitrary sets of reference types.
+3. Entity-Attribute-Value (EAV) or Vertical Model
+    Description:
+    - A flexible design where references and their attributes are stored separately.
+    - Supports dynamic schema evolution without requiring database structure changes.
+    Advantages:
+    - Flexible and extensible, accommodating arbitrary attributes.
+    - Ideal for datasets with highly variable or unpredictable metadata.
+    Disadvantages:
+    - Querying and reporting are more complex.
+    - Harder to enforce constraints on attribute values.
 4. Document-Oriented Model
     Description:
     - Uses JSON columns to store variable or nested bibliographic data while maintaining relational structure for core fields.
