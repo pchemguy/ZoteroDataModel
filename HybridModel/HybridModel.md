@@ -1,71 +1,21 @@
-# Hybrid Extensible Model for Semi-structured Data in SQLite
-
-## Modeling Bibliographic Information in RDBMSs
-
-Datasets, such as bibliographic information libraries, present challenges to managing the data effectively in relational databases, because different reference types, such as *book* or *journal article*, have different sets of fields. Further, to cover a broad spectrum of use cases, a sufficiently large set of reference types needs to be used. Further yet, it is desirable to have the ability to define new types dynamically making it possible to tailor the data model to unusual scenarios. There are several approaches used to store such data in RDBMSs:
-1. Flat Table Model
-    Description:
-    - All bibliographic information is stored in a single table.
-    - Each row represents one reference (e.g., book, article, or patent).
-    Advantages:
-    - Simple and easy to implement.
-    - Suitable for small datasets with limited variability in fields.
-    Disadvantages:
-    - Inefficient for highly diverse or large datasets due to sparse or unused columns.
-    - Difficult to enforce data integrity for specific document types.
-2. Normalized Relational Model
-    Description:
-    - Relational tables separate bibliographic information into core entities (e.g., authors, journals, publishers).
-    - Individual reference types are stored in dedicated tables (e.g., books, patents, standards).
-    Advantages:
-    - High data integrity through normalization.
-    - Efficiently supports complex queries (e.g., retrieving all articles by an author).
-    Disadvantages:
-    - Requires a more complex schema.
-    - Joins are necessary for queries, which may impact performance for large datasets.
-    - Ill-suited for common queries involving arbitrary sets of reference types.
-3. Entity-Attribute-Value (EAV) or Vertical Model
-    Description:
-    - A flexible design where references and their attributes are stored separately.
-    - Supports dynamic schema evolution without requiring database structure changes.
-    Advantages:
-    - Flexible and extensible, accommodating arbitrary attributes.
-    - Ideal for datasets with highly variable or unpredictable metadata.
-    Disadvantages:
-    - Querying and reporting are more complex.
-    - Harder to enforce constraints on attribute values.
-4. Document-Oriented Model
-    Description:
-    - Uses JSON columns to store variable or nested bibliographic data while maintaining relational structure for core fields.
-    Advantages:
-    - Combines relational integrity with the flexibility of semi-structured data.
-    - Suitable for datasets where metadata varies significantly by document type.
-    Disadvantages:
-    - JSON query capabilities depend on the features of the RDBMS in use.
-    - Higher complexity when handling JSON fields programmatically.
-    - Challenges with ensuring data integrity and efficient access at the database level.
-
-Modern bibliographic managers often use hybrid models. For example, [Zotero][ZoteroDataModel] uses relational model for authors, attachments, notes, tags, and categories, while storing field data using the EAV model.
-
 # Combining JSON, Virtual Generated Columns, and Partial Indexes
 
 A potentially interesting hybrid approach incorporates several features:
-- Core fields common to most references are stored in dedicated columns or tables (*reference type*, *title*, *authors*, *date*, *item id type*, *item id*, **==WHAT ELSE?==**).
+- Core fields common to most references are stored in dedicated columns or tables (reference type, title, authors, date, item id type, item id).
 - Other fields are stored in a `TEXT` column as JSON documents.
 - Virtual generated columns are added as necessary for each commonly accessed field and contain values extracted from the JSON column (it is possible to add such columns for all fields).
 - Partial indexes are created on each generated column, where the column value is not `NULL`.
-
 
 This design provides several advantages: 
 - Virtual generated columns
     - do not consume storage space;
     - can be added conveniently via the `ALTER TABLE` statement without affecting the rest of the schema;
-    - can be used to define constrains, enforcing consistency and format;
+    - can be used to define constrains, enforcing consistency and data format;
     - are only evaluated when accessed, limiting performance penalty in case when multiple generated columns are used;
     - new generated columns do not affect previous queries that retrieve desired columns explicitly, rather than using wildcards.
 - A set of generated columns in combination with the core fields act as a partially denormalized flat table, enabling the use of basic SQL queries.
-- Partial indexes generated columns storing non-null values only enabling robust filtering on generated columns without accessing the columns directly and causing associated calculations. While indexes can be created on expressions directly, such approach is inherently fragile.
-- 
+- Partial indexes on generated columns' non-null values only enabling robust filtering on generated columns without accessing the columns directly and causing associated recalculations. While indexes can be created on expressions directly, such approach is inherently fragile.
+-  
   
 
 <!-- References -->
