@@ -40,3 +40,22 @@ FROM itemTypes AS it, fields AS bf, fields AS f, baseFieldMappings AS bfm
 WHERE (bfm.itemTypeID, bfm.baseFieldID, bfm.fieldID) = (it.itemTypeID, bf.fieldID, f.fieldID)
 ORDER BY bf.fieldName, f.fieldName;
 ```
+
+### Item Types
+
+```sql
+SELECT
+    it.typeName,
+    itf.itemTypeID,
+    itf.fieldID,
+    fields.fieldName,
+    itf.orderIndex,
+    bfm.baseFieldID,
+    bf.fieldName AS baseFieldName
+FROM itemTypes AS it, itemTypeFields AS itf, fields
+LEFT JOIN baseFieldMappings AS bfm ON itf.fieldID = bfm.fieldID
+LEFT JOIN fields AS bf ON bfm.baseFieldID = bf.fieldID
+WHERE itf.itemTypeID = it.itemTypeID
+  AND itf.fieldID = fields.fieldID
+ORDER BY itf.itemTypeID, itf.orderIndex
+```
